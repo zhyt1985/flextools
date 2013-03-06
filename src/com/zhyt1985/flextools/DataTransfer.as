@@ -28,12 +28,12 @@ package com.zhyt1985.flextools
 					continue;
 				}
 
-				if (accessor.isWriteable())
+				if (accessor.isWriteable()&&data.hasOwnProperty(accessor.name))
 				{
 					switch (accessor.type.name)
 					{
 						case "String":
-							instance[accessor.name]=data[accessor.name] as String;
+							instance[accessor.name]=String(data[accessor.name]);
 							break;
 						case "Number":
 							instance[accessor.name]=Number(data[accessor.name]);
@@ -48,7 +48,7 @@ package com.zhyt1985.flextools
 							instance[accessor.name]=Boolean(data[accessor.name]);
 							break;
 						case "Date":
-							var dateString:String=data[accessor.name] as String;
+							var dateString:String=String(data[accessor.name]);
 							if (dateString)
 							{
 								dateString=dateString.replace(/-/g, "/"); // Date.parse不支持连字符（”-“），将”-“替换为”/“
